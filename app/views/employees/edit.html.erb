@@ -1,0 +1,41 @@
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+
+<h1>edit employee</h1>
+<div id="form_edit">
+<%= form_for [@emp] do |f| %>
+  <% if @emp.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@emp.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @emp.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_field :name, :required => true %>
+  <br><br>
+  <%= f.label :manager_id, "manager Name:" %>
+  <%= f.collection_select(:manager_id, @man, :id, :name) %>
+
+
+<br><br>
+  <%= f.label :city_id, "City Name:" %>
+  <%= f.collection_select(:city_id, City.all, :id, :name, :class => "required") %>
+
+<br><br>
+  <%= f.check_box :willing_to_relocate %>
+  <%= f.label :willing_to_relocate, "Willing to relocate" %>
+  <%= f.submit "update" %>
+<% end %>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_employee").validate();
+});
+</script>

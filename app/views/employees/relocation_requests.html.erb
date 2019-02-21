@@ -1,0 +1,20 @@
+<h1>Relocation requests: <%=@emp.count%></h1>
+<table style="width:100%" border="1px solid darkblue">
+	<tr>
+		<th><b>S.No</b></th>
+		<th><b>Employee Name</b></th>
+		<th><b>Employee City</b></th>
+	</tr>
+
+<% @emp.each_with_index do |emp,index|%>
+	<tr>
+		<td><%=index+1%></td>
+		<td><%=link_to emp.name, edit_employee_path(emp)%></td>
+		<% @c.each do |c| %>
+			<% if emp.city_id==c.id %> 
+				<td><%=c.name%></td>
+			<% end %>
+		<% end %> 
+	</tr>
+<%end%>
+</table>	

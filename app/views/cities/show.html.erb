@@ -1,0 +1,29 @@
+<h1>City Name : <%=@c.name%></h1>
+<h2>Total Employees: <%=@e.count%></h2>
+<table style="width:100%" border="1px solid darkblue">
+	<tr>
+		<th>S.No   </th>
+		<th>Name   </th>
+		<th>Manager's Name   </th>
+		<th>Manager's City   </th>
+	</tr>
+
+<% @e.each_with_index do |emp,index|%>
+	<tr>
+		<% p=0%>
+		<td><%=index+1%></td>
+		<td><%=emp.name%></td>
+		<% @m.each do |m| %>
+			<% if emp.manager_id==m.id %>
+				<td><%=m.name%></td> 
+				<% p=m.city_id %>
+			<% end %>
+		<% end %>
+		<% @c_all.each do |c| %>
+			<% if c.id==p %>
+				<td><%=c.name%></td> 
+			<% end %>
+		<% end %> 
+	</tr>
+<%end%>
+</table>	

@@ -1,0 +1,32 @@
+<h1>Managers</h1>
+<hr>
+<table style="width:100%" border="1px solid darkblue">
+    <tr>
+        <th><b>S.No</b></th>
+        <th><b>Name of manager</b></th>
+        <th><b>City of manager</b></th>
+        <th><b>ID</b></th>
+        <th><b>No of Sub</b></th>
+    </tr>
+    <% @man.each_with_index do |m,index| %>
+    <tr>
+        <td><%= index+1 %></td>
+        <td><%=link_to m.name, employee_path(m)%></td>
+        <% @c.each do |p| %>
+            <% if p.id == m.city_id %>
+                <td><%=p.name%></td>
+            <%end%>
+        <%end%>
+        <td><%=m.id%></td>
+        <% count = 0 %>
+        <% @sub.each do |x| %>
+            <% if m.id == x.manager_id %>
+                <%count+=1%>
+            <% end %>
+        <% end %>
+        <td><%=count%></td>
+    </tr>
+    <%end%>
+</table>
+<br>
+<center><%= will_paginate @man %></center>

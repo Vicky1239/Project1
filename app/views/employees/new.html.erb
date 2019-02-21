@@ -1,0 +1,25 @@
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+
+<h1>Add New employee</h1>
+<%= form_for @emp do |f| %>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_field :name %>
+  <br><br>
+  <%= f.label :manager_id, "manager_id:"%>
+  <%= f.text_field :manager_id%>
+  <br><br>
+  <%= f.label :city_id, "City Name:" %><br>
+  <%= f.collection_select(:city_id, City.all, :id, :name) %>
+  <br><br>
+  <%= f.check_box :willing_to_relocate %>
+  <%= f.label :willing_to_relocate, "Willing to relocate" %>
+  <%= f.submit "create" %>
+<% end %>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new_employee").validate();
+});
+</script>

@@ -1,0 +1,23 @@
+<h1>Employee</h1>
+<h3>ID - <%=@manager.id %></h3> 
+<h3>Name - <%=@manager.name %></h3>
+<h3>City - <%=@c2[0][:name] %></h3>
+ <h3>Subordinates count - <%=@subo.count %></h3>
+<table border="1px solid darkblue">
+	<tr>
+		<th>S.No</th>
+		<th>Name</th>
+		<th>City</th>
+	</tr>
+	<% @subo.each_with_index do |x,index| %>
+	<% @c.each do |p| %>
+		<% if p.id == x.city_id %>
+			<tr>
+				<td><%=index+1%></td>
+				<td><%=link_to x.name, edit_employee_path(x)%></td>
+				<td><%=p.name%></td>
+			</tr>
+		<%end%>
+	<%end%>
+	<%end%>
+</table>
