@@ -3,8 +3,10 @@
     <tr>
         <th>S.No....</th>
         <th>Name....</th>
-        <th>Employee Id....</th>
+        <th>Profile image</th>
         <th>City....</th>
+        <th>Manager</th>
+        <th>Employee Id....</th>
         <th>Manager Id....</th>
         <th>Manager/Employee....</th>
     </tr>
@@ -14,8 +16,18 @@
             <tr>
                 <td><%=index+1%></td>
                 <td><%=link_to x.name, edit_employee_path(x)%></td>
-                <td><%=x.id%></td>
+                <% if x.image.exists? %>
+                    <td><%= link_to (image_tag x.image.url, :style => "width :200px;height :100px;") ,employee_path(x) %></td>
+                <% else %>
+                    <td><%= link_to (image_tag "/assets/3" , :style => "width :200px;height :100px;") ,employee_path(x) %></td>
+                <% end %>
                 <td><%=p.name%></td>
+                <% @man.each do |m| %>
+                    <% if m.id==x.manager_id %>
+                        <td><%=m.name%></td>
+                    <% end %>
+                <% end %>
+                <td><%=x.id%></td>
                 <td><%=x.manager_id%></td>
                 <% if x.id==x.manager_id %>
                     <td><%="Manager"%></td>

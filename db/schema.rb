@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_054935) do
+ActiveRecord::Schema.define(version: 2019_02_25_071016) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -25,6 +25,10 @@ ActiveRecord::Schema.define(version: 2019_02_20_054935) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "willing_to_relocate", default: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
     t.index ["city_id"], name: "index_employees_on_city_id"
   end
 

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	resources :employees do
 		collection do
 			get :relocation_requests
+			get :ajax
 		end
 	end
 	resources :cities

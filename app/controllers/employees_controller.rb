@@ -2,19 +2,39 @@ class EmployeesController < ApplicationController
 	def index
 		@emp=Employee.all
 		@city=City.all
+		@man=Employee.where("manager_id=id")
+	end
+	def show
+		@emp = Employee.find(params[:id])
+		@c2 = City.where(id: @emp.city_id)
+		@subo = Employee.where(manager_id: @emp.id)
+		@c = City.all
 	end
 
 	def new 
 		@emp=Employee.new
+		@count=0
 		@man=Employee.where("manager_id=id")
 	end
 	def create
+		@a=employ_params[:city_id].to_i
+		@count=Employee.where(city_id: @a).count
+		@city_name=City.select(:name).where(id: @a)	
 		@emp=Employee.new(employ_params)
-		if @emp.save
+		byebug
+		if @count<3 && @emp.save
 			redirect_to employees_path
 		else
 			render 'new'
 		end
+	end
+	def ajax
+		@k=params[:keyword]
+		@test=Employee.select(:city_id).group(:city_id).having("count(*) > 2").all
+		respond_to do |format|
+			format.js
+		end
+
 	end
 	
 	def edit
@@ -25,13 +45,6 @@ class EmployeesController < ApplicationController
 			@man=Employee.where("manager_id=id")
 		end
 
-	end
-
-	def show
-		@manager = Employee.find(params[:id])
-		@c2 = City.where(id: @manager.city_id)
-		@subo = Employee.where(manager_id: @manager.id)
-		@c = City.all
 	end
 
 
@@ -49,6 +62,6 @@ class EmployeesController < ApplicationController
 		@c = City.all
 	end
 	def employ_params
-		params.require(:employee).permit(:name, :manager_id, :city_id, :willing_to_relocate)
+		params.require(:employee).permit(:name, :manager_id, :city_id, :willing_to_relocate, :image)
 end
 end

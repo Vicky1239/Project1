@@ -2,20 +2,54 @@
 
 
 <h1>Add New employee</h1>
-<%= form_for @emp do |f| %>
+<%= form_for @emp, html: {multipart: true} do |f| %>
+  <% if @emp.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@emp.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @emp.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <% if @count>2 %>
+      <div id="error_explanation1">
+        <h2>
+          one error prohibited this article from being saved:
+        </h2>
+        <ul>
+          <li><%= @city_name[0].name %> is already OverCrowded, please look 'for' some other place"</li>
+        </ul>
+      </div>
+    <% end %>
   <%= f.label :name, "Name:" %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name,:required => true%>
   <br><br>
   <%= f.label :manager_id, "manager_id:"%>
-  <%= f.text_field :manager_id%>
+  <%= f.text_field :manager_id, :class => "required"%>
   <br><br>
-  <%= f.label :city_id, "City Name:" %><br>
+  <%= f.label :city_id, "City Name:" %>
   <%= f.collection_select(:city_id, City.all, :id, :name) %>
-  <br><br>
-  <%= f.check_box :willing_to_relocate %>
+  <div class="xyz">
+    
+  </div>
+  <br>
   <%= f.label :willing_to_relocate, "Willing to relocate" %>
-  <%= f.submit "create" %>
+  <%= f.check_box :willing_to_relocate %><br>
+  <p>
+    <%= image_tag "/assets/3" , :style => "width :200px;height :100px;" %>
+  </p>
+  <p>
+  <%= f.label :image, "Profile picture" %>
+  <%= f.file_field :image %>
+  </p>
+  <%= f.submit "create" %><br>
 <% end %>
+
 
 
 <script type="text/javascript">
@@ -23,3 +57,33 @@ $(document).ready(function(){
     $("#new_employee").validate();
 });
 </script>
+
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+  var dropdown = document.getElementById("#employee_city_id");
+    dropdown.onchange = function(event){
+       if(dropdown.value==40){
+         alert("Your message");
+       }
+    }
+});
+</script> -->
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+  var myvar =$('#employee_city_id').val('selected');
+  $("#employee_city_id select:selected").hover(function(){
+    alert("the city is overcrowded");
+  });
+});
+</script> -->
+<!-- $("select").hover(function (e)
+{
+     var $target = $(e.target); 
+     if($target.is('option')){
+         alert($target.attr("id"));//Will alert id if it has id attribute
+         alert($target.text());//Will alert the text of the option
+         alert($target.val());//Will alert the value of the option
+     }
+}); -->
+
+

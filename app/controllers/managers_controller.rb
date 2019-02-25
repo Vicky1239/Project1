@@ -4,4 +4,7 @@ class ManagersController < ApplicationController
 		@man = Employee.where("manager_id=id").paginate(:page => params[:page],:per_page => 10)
 		@c = City.all
 	end
+	def show
+		
+	end
 end

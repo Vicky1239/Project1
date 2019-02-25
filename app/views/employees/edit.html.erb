@@ -26,11 +26,25 @@
 
 <br><br>
   <%= f.label :city_id, "City Name:" %>
-  <%= f.collection_select(:city_id, City.all, :id, :name, :class => "required") %>
+  <%= f.collection_select(:city_id, City.all, :id, :name, :required => true) %>
+  <div class="xyz">
+    
+  </div>
 
-<br><br>
-  <%= f.check_box :willing_to_relocate %>
+<br>
   <%= f.label :willing_to_relocate, "Willing to relocate" %>
+  <%= f.check_box :willing_to_relocate %>
+  <p>
+<% if @emp.image.exists? %>
+  <%= link_to (image_tag @emp.image.url, :style => "width :200px;height :100px;") ,employee_path(@emp) %>
+<% else %>
+        <%= link_to (image_tag "/assets/3" , :style => "width :200px;height :100px;") ,employee_path(@emp) %>
+<% end %>
+</p>
+  <p>
+  <%= f.label :image, "Profile picture" %>
+  <%= f.file_field :image %>
+  </p>
   <%= f.submit "update" %>
 <% end %>
 </div>
@@ -39,3 +53,4 @@ $(document).ready(function(){
     $("#new_employee").validate();
 });
 </script>
+

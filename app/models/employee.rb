@@ -5,6 +5,8 @@ class Employee < ApplicationRecord
 	validate :custom_validation, :on => :create
 	# validate :custom1_validation, :on => :update
 	belongs_to :city
+	has_attached_file :image
+	validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
 	private
 
 	def custom_validation

@@ -1,8 +1,14 @@
 <h1>Employee</h1>
-<h3>ID - <%=@manager.id %></h3> 
-<h3>Name - <%=@manager.name %></h3>
+				<% if @emp.image.exists? %>
+                   <%= image_tag @emp.image.url, :style => "width :200px;height :100px;"%>
+                <% else %>
+                    <td><%= image_tag "/assets/3" , :style => "width :200px;height :100px;" %></td>
+                <% end %>
+<h3>ID - <%=@emp.id %></h3> 
+<h3>Name - <%=@emp.name %></h3>
 <h3>City - <%=@c2[0][:name] %></h3>
  <h3>Subordinates count - <%=@subo.count %></h3>
+ 
 <table border="1px solid darkblue">
 	<tr>
 		<th>S.No</th>
