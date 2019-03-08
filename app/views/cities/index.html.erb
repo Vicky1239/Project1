@@ -7,16 +7,10 @@
 		<th>Employees</th>
 	</tr>
 	<% @cities.each_with_index do |c,index| %>
-		<% count =0 %>
-		<% @e.each do |p| %>
-			<% if c.id==p.city_id %>
-				<%count+=1%>
-			<%end%>
-		<%end%>
 		<tr>
 			<td><%=index+1%></td>
 			<td><%=link_to c.name, city_path(c)%></td>
-			<td><%=count%></td>
+			<td><%=c.employees.count%></td>
 		</tr>
 	<%end%>
 </table>

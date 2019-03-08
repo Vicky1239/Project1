@@ -6,25 +6,15 @@
         <th><b>Name of manager</b></th>
         <th><b>City of manager</b></th>
         <th><b>ID</b></th>
-        <th><b>No of Sub</b></th>
+        <th><b>No of Subordinates</b></th>
     </tr>
     <% @man.each_with_index do |m,index| %>
     <tr>
         <td><%= index+1 %></td>
         <td><%=link_to m.name, employee_path(m)%></td>
-        <% @c.each do |p| %>
-            <% if p.id == m.city_id %>
-                <td><%=p.name%></td>
-            <%end%>
-        <%end%>
+        <td><%=m.city.name%></td>
         <td><%=m.id%></td>
-        <% count = 0 %>
-        <% @sub.each do |x| %>
-            <% if m.id == x.manager_id %>
-                <%count+=1%>
-            <% end %>
-        <% end %>
-        <td><%=count%></td>
+        <td><%=m.subordinates.count%></td>
     </tr>
     <%end%>
 </table>

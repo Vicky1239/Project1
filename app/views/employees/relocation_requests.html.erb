@@ -10,11 +10,7 @@
 	<tr>
 		<td><%=index+1%></td>
 		<td><%=link_to emp.name, edit_employee_path(emp)%></td>
-		<% @c.each do |c| %>
-			<% if emp.city_id==c.id %> 
-				<td><%=c.name%></td>
-			<% end %>
-		<% end %> 
+		<td><%=emp.city.name%></td>
 	</tr>
 <%end%>
 </table>	

@@ -1,4 +1,4 @@
 class City < ApplicationRecord
 	validates :name, presence: true,uniqueness: true
-	has_many :employee
+	has_many :employees
 end

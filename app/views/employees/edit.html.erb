@@ -23,30 +23,37 @@
   <%= f.label :manager_id, "manager Name:" %>
   <%= f.collection_select(:manager_id, @man, :id, :name) %>
 
-
-<br><br>
+  <br><br>
   <%= f.label :city_id, "City Name:" %>
-  <%= f.collection_select(:city_id, City.all, :id, :name, :required => true) %>
+  <%= f.collection_select(:city_id, @cities, :id, :name, :required => true) %>
   <div class="xyz">
     
   </div>
-
-<br>
+  <br>
   <%= f.label :willing_to_relocate, "Willing to relocate" %>
   <%= f.check_box :willing_to_relocate %>
   <p>
-<% if @emp.image.exists? %>
-  <%= link_to (image_tag @emp.image.url, :style => "width :200px;height :100px;") ,employee_path(@emp) %>
-<% else %>
+    <% if @emp.image.exists? %>
+      <%= link_to (image_tag @emp.image.url, :style => "width :200px;height :100px;") ,employee_path(@emp) %>
+    <% else %>
         <%= link_to (image_tag "/assets/3" , :style => "width :200px;height :100px;") ,employee_path(@emp) %>
-<% end %>
-</p>
-  <p>
-  <%= f.label :image, "Profile picture" %>
-  <%= f.file_field :image %>
+    <% end %>
   </p>
+  <p>
+    <%= f.label :image, "Profile picture" %>
+    <%= f.file_field :image %>
+  </p>
+
+  <hr>
+  <% if !@emp.manager_id.nil? %>
+    <p>
+     <%= f.check_box :promote %>
+     <%= label :promote, "Promote this employee to manager" %>
+    </p>
+  <% end %>
   <%= f.submit "update" %>
 <% end %>
+
 </div>
 <script type="text/javascript">
 $(document).ready(function(){

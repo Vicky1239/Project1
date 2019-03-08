@@ -22,7 +22,7 @@
           one error prohibited this article from being saved:
         </h2>
         <ul>
-          <li><%= @city_name[0].name %> is already OverCrowded, please look 'for' some other place"</li>
+          <li><%= @city.name %> is already OverCrowded, please look 'for' some other place"</li>
         </ul>
       </div>
     <% end %>
@@ -33,7 +33,7 @@
   <%= f.text_field :manager_id, :class => "required"%>
   <br><br>
   <%= f.label :city_id, "City Name:" %>
-  <%= f.collection_select(:city_id, City.all, :id, :name) %>
+  <%= f.collection_select(:city_id, @cities, :id, :name) %>
   <div class="xyz">
     
   </div>
@@ -49,6 +49,7 @@
   </p>
   <%= f.submit "create" %><br>
 <% end %>
+
 
 
 

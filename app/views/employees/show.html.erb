@@ -1,29 +1,24 @@
 <h1>Employee</h1>
-				<% if @emp.image.exists? %>
-                   <%= image_tag @emp.image.url, :style => "width :200px;height :100px;"%>
-                <% else %>
-                    <td><%= image_tag "/assets/3" , :style => "width :200px;height :100px;" %></td>
-                <% end %>
+<% if @emp.image.exists? %>
+    <%= image_tag @emp.image.url, :style => "width :200px;height :100px;"%>
+<% else %>
+	<td><%= image_tag "/assets/3" , :style => "width :200px;height :100px;" %></td>
+<% end %>
 <h3>ID - <%=@emp.id %></h3> 
 <h3>Name - <%=@emp.name %></h3>
-<h3>City - <%=@c2[0][:name] %></h3>
- <h3>Subordinates count - <%=@subo.count %></h3>
- 
+<h3>City - <%=@emp.city.name%></h3>
+<h3>Subordinates count - <%=@emp.subordinates.count %></h3>
 <table border="1px solid darkblue">
 	<tr>
 		<th>S.No</th>
 		<th>Name</th>
 		<th>City</th>
 	</tr>
-	<% @subo.each_with_index do |x,index| %>
-	<% @c.each do |p| %>
-		<% if p.id == x.city_id %>
-			<tr>
-				<td><%=index+1%></td>
-				<td><%=link_to x.name, edit_employee_path(x)%></td>
-				<td><%=p.name%></td>
-			</tr>
-		<%end%>
-	<%end%>
+	<% @emp.subordinates.each_with_index do |x,index| %>
+		<tr>
+			<td><%=index+1%></td>
+			<td><%=link_to x.name, edit_employee_path(x)%></td>
+			<td><%=x.city.name%></td>
+		</tr>
 	<%end%>
 </table>
